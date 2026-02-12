@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine?</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  }
+
+  /* Floating Hearts Background */
+  .hearts {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .hearts span {
+    position: absolute;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: red;
+    transform: rotate(45deg);
+    animation: float 10s linear infinite;
+  }
+
+  .hearts span::before,
+  .hearts span::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: red;
+    border-radius: 50%;
+  }
+
+  .hearts span::before {
+    top: -12px;
+    left: 0;
+  }
+
+  .hearts span::after {
+    left: -12px;
+    top: 0;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(45deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-10vh) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Center Card Effect */
+  #main, #result {
+    margin-top: 100px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 25px;
+    display: inline-block;
+  }
+
+  #result {
+    display: none;
+  }
+
+  /* Image Styling */
+  #valentineImage {
+    width: 250px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+
+  #question {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #fff;
+  }
+
+  button {
+    font-size: 1.3rem;
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+  }
+
+  #yesBtn:hover {
+    transform: scale(1.1);
+  }
+
+  #noBtn {
+    background: #444;
+    color: white;
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<div class="hearts">
+  <span style="left:10%; animation-duration:12s;"></span>
+  <span style="left:20%; animation-duration:8s;"></span>
+  <span style="left:35%; animation-duration:10s;"></span>
+  <span style="left:50%; animation-duration:14s;"></span>
+  <span style="left:65%; animation-duration:9s;"></span>
+  <span style="left:80%; animation-duration:11s;"></span>
+  <span style="left:90%; animation-duration:7s;"></span>
+</div>
+
+<div id="main">
+
+  <!-- Use image from same folder -->
+  <img id="valentineImage"
+       src="V Req 1.jpeg"
+       alt="Cute Valentine">
+
+  <div id="question">Will you be my Valentine?</div>
+  <button id="yesBtn">YES ❤️</button>
+  <button id="noBtn">NO 💔</button>
+</div>
+
+<div id="result">
+  <h1 style="color:white;">YAY!!! 🎉</h1>
+  <img src="V Accept 2.jpeg" width="300" style="border-radius:20px;">
+  <p style="color:white;">You have NOOO other option 😄</p>
+  <p style="color:white;">I love youuuu ❤️</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const fromName = params.get("name") || "Dei Duplicate";
+  const toName = params.get("valentineName") || "My Valentine";
+
+  document.getElementById("question").innerText =
+    `${fromName}, will you be my Valentine, ${toName}?`;
+
+  document.getElementById("yesBtn").addEventListener("click", () => {
+    document.getElementById("main").style.display = "none";
+    document.getElementById("result").style.display = "inline-block";
+  });
+
+  const noBtn = document.getElementById("noBtn");
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+</script>
+
+</body>
+</html>
